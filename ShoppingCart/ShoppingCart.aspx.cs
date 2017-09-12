@@ -4,36 +4,52 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Collections.Generic.Dictionary<string, int>;
 
 namespace ShoppingCart
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        List<string>listOfItems = new List<string>();
-        Label[] quantity;
-        Label[] label;
+        Dictionary<string, int> itemsInCart;
+        Label[] price;
+        Label[] productName;
+        int totalPrice = 0;
+        Label orderTotal;
         protected void Page_Load(object sender, EventArgs e)
         {
-            listOfItems = (List<string>) HttpContext.Current.Session["itemList"];
-            quantity = new Label[listOfItems.Count];
-            label = new Label[listOfItems.Count];
-            for (int i=1;i<=listOfItems.Count;i++)
+            itemsInCart = (Dictionary<string,int>) HttpContext.Current.Session["itemList"];
+            price = new Label[itemsInCart.Count];
+            productName = new Label[itemsInCart.Count];
+            KeyCollection keys = itemsInCart.Keys;
+            List<string> items = keys.ToList<string>();
+            for (int i=1;i<=itemsInCart.Count;i++)
             {
 
-                label[i-1] = new Label();
-                label[i-1].ID = "lbl_item" + i;
-                label[i-1].Text = listOfItems[i-1];
-                label[i-1].Style["Position"] = "Absolute";
-                this.Controls.Add(label[i-1]);
+                productName[i-1] = new Label();
+                productName[i-1].ID = "lbl_item" + i;
+                productName[i - 1].Text = items[i-1];
+                productName[i-1].Style["Position"] = "Absolute";
+                this.Controls.Add(productName[i-1]);
                 this.Controls.Add(new LiteralControl("<br>"));
-                quantity[i - 1] = new Label();
-                quantity[i - 1].ID = "btn_item" + i;
-                quantity[i - 1].Text = "1";
-                quantity[i - 1].Style["Position"] = "Absolute";
-                this.Controls.Add(quantity[i - 1]);
+                price[i - 1] = new Label();
+                price[i - 1].ID = "btn_item" + i;
+                totalPrice += itemsInCart[items[i - 1]];
+                price[i - 1].Text = itemsInCart[items[i-1]].ToString();
+                price[i - 1].Style["Position"] = "Absolute";
+                this.Controls.Add(price[i - 1]);
+                this.Controls.Add(new LiteralControl("<br>"));
                 this.Controls.Add(new LiteralControl("<br>"));
             }
-            ViewState["item"] = listOfItems;
+            orderTotal = new Label();
+            orderTotal.ID = "orderPrice_lbl";
+            orderTotal.Text = totalPrice.ToString();
+            Label total = new Label();
+            total.ID = "Total_lbl";
+            total.Text = "Total Price: ";
+            this.Controls.Add(total);
+            this.Controls.Add(orderTotal);
+            ViewState["total"] = orderTotal.Text;
+            ViewState["item"] = itemsInCart;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -41,16 +57,17 @@ namespace ShoppingCart
             Dictionary<string, int> items = new Dictionary<string, int>();
             if(ViewState["item"]!=null)
             {
-                listOfItems = (List<string>)ViewState["item"];
+                itemsInCart = (Dictionary<string,int>)ViewState["item"];
             }
-            for(int i=0;i<listOfItems.Count;i++)
+            for(int i=0;i<itemsInCart.Count;i++)
             {
                 int q;
-                int.TryParse(quantity[i].Text, out q);
-                items[label[i].Text] = q;
+                int.TryParse(price[i].Text, out q);
+                items[productName[i].Text] = q;
             }
-            HttpContext.Current.Session["itemsOrdered"] = items;
-            Response.Redirect("Inventory.aspx");
+            HttpContext.Current.Session["itemsOrdered"] = itemsInCart;
+            HttpContext.Current.Session["total"] = ViewState["total"].ToString();
+            Response.Redirect("OrderGeneration.aspx");
         }
     }
 }
