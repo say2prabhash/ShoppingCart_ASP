@@ -24,8 +24,12 @@ namespace ShoppingCart
                 myConnection.Open();
    
                 SqlCommand myCommand = new SqlCommand("INSERT into Orders(Date,TotalAmount)Values('"+date+"','"+ total + "')",myConnection);
+                SqlCommand orderDetailCommand = new SqlCommand("select PId", myConnection);
                 myCommand.ExecuteNonQuery();
                 myConnection.Close();
+                Label lbl = new Label();
+                lbl.Text = "Thank You for placing order";
+                this.Controls.Add(lbl);
             }
             catch (Exception exception)
             {
