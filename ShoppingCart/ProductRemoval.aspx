@@ -10,11 +10,14 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:Label ID="Label1" runat="server" Text="Enter the Product Id"></asp:Label>
         <p>
-            <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+            <asp:Label ID="Label3" runat="server" Text="Enter Product Id"></asp:Label>
+            <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged1"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Remove" />
         </p>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Remove" />
+        <p>
+            <asp:Label ID="Label2" runat="server" Text="Products available in inventory"></asp:Label>
+        </p>
     </form>
 </body>
 </html>

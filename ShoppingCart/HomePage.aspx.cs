@@ -69,11 +69,11 @@ namespace ShoppingCart
         }
         protected void AddToCart(object sender,EventArgs e)
         {
+            Button b = (Button)sender;
             if (ViewState["cart"]!=null)
             {
                 cartItems = new Dictionary<string, int>();
                 cartItems = (Dictionary<string,int>)ViewState["cart"];
-                Button b = (Button)sender;
                 for (int i = 0; i < productName.Length; i++)
                 {
                     if (b.ID.Equals(productName[i].Text))
@@ -88,7 +88,7 @@ namespace ShoppingCart
             else
             {
                 cartItems = new Dictionary<string, int>();
-                Button b = (Button)sender;
+                
                 for (int i = 0; i < productName.Length; i++)
                 {
                     if (b.ID.Equals(productName[i].Text))
