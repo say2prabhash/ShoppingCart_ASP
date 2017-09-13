@@ -40,6 +40,10 @@ namespace ShoppingCart
                 this.Controls.Add(new LiteralControl("<br>"));
                 this.Controls.Add(new LiteralControl("<br>"));
             }
+            orderTotalCalculator();
+        }
+        protected void orderTotalCalculator()
+        {
             orderTotal = new Label();
             orderTotal.ID = "orderPrice_lbl";
             orderTotal.Text = totalPrice.ToString();
@@ -51,7 +55,6 @@ namespace ShoppingCart
             ViewState["total"] = orderTotal.Text;
             ViewState["item"] = itemsInCart;
         }
-
         protected void Button1_Click(object sender, EventArgs e)
         {
             Dictionary<string, int> items = new Dictionary<string, int>();
