@@ -65,6 +65,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
+    <Content Include="Inventory.aspx" />
     <Content Include="OrderGeneration.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -75,17 +77,41 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ProductRemoval.aspx" />
     <Content Include="ShoppingCart.aspx" />
     <Content Include="HomePage.aspx" />
+    <Content Include="UpdateSuccessful.aspx" />
+    <Content Include="UpdationUnsuccesfull.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.aspx.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventory.aspx.designer.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrderGeneration.aspx.cs">
       <DependentUpon>OrderGeneration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OrderGeneration.aspx.designer.cs">
       <DependentUpon>OrderGeneration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductRemoval.aspx.cs">
+      <DependentUpon>ProductRemoval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductRemoval.aspx.designer.cs">
+      <DependentUpon>ProductRemoval.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart.aspx.cs">
@@ -101,6 +127,20 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateSuccessful.aspx.cs">
+      <DependentUpon>UpdateSuccessful.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateSuccessful.aspx.designer.cs">
+      <DependentUpon>UpdateSuccessful.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdationUnsuccesfull.aspx.cs">
+      <DependentUpon>UpdationUnsuccesfull.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdationUnsuccesfull.aspx.designer.cs">
+      <DependentUpon>UpdationUnsuccesfull.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>

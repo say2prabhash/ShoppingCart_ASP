@@ -12,6 +12,7 @@ namespace ShoppingCart
     public partial class UserChoice : System.Web.UI.Page
     {
         Dictionary<string, int> cartItems;
+        Dictionary<string, string> productId;
         Label[] productName;
         Label[] productPrice;
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace ShoppingCart
                 myReader1 = myCommand.ExecuteReader();
                 productName = new Label[i];
                 productPrice = new Label[i];
+                productId = new Dictionary<string, string>();
                 for (int j=0;j<i;j++)
                 {
                     myReader1.Read();
@@ -42,6 +44,7 @@ namespace ShoppingCart
                     productName[j].Text = myReader1["PName"].ToString();
                     productPrice[j] = new Label();
                     productPrice[j].Text = myReader1["Price"].ToString();
+                    productId[productName[j].Text] = myReader1["PId"].ToString();
                     this.Form.Controls.Add(productName[j]);
                     this.Form.Controls.Add(new LiteralControl("<br>"));
                     this.Form.Controls.Add(productPrice[j]);
@@ -57,6 +60,7 @@ namespace ShoppingCart
                 }
                 myReader1.Close();
                 myConnection.Close();
+                HttpContext.Current.Session["productId"] = productId;
             }
             catch(Exception exception)
             {
