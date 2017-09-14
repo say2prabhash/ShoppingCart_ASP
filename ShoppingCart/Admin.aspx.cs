@@ -23,5 +23,10 @@ namespace ShoppingCart
         {
             Response.Redirect("ProductRemoval.aspx");
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UpdateInventory.aspx");
+        }
     }
 }

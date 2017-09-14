@@ -80,6 +80,7 @@
     <Content Include="ProductRemoval.aspx" />
     <Content Include="ShoppingCart.aspx" />
     <Content Include="HomePage.aspx" />
+    <Content Include="UpdateInventory.aspx" />
     <Content Include="UpdateSuccessful.aspx" />
     <Content Include="UpdationUnsuccesfull.aspx" />
     <Content Include="Web.config" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateInventory.aspx.cs">
+      <DependentUpon>UpdateInventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateInventory.aspx.designer.cs">
+      <DependentUpon>UpdateInventory.aspx</DependentUpon>
     </Compile>
     <Compile Include="UpdateSuccessful.aspx.cs">
       <DependentUpon>UpdateSuccessful.aspx</DependentUpon>
