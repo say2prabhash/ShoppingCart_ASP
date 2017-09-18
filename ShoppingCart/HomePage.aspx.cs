@@ -17,8 +17,7 @@ namespace ShoppingCart
         Label[] productPrice;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=TAVDESKRENT014;User Id=sa;Password=test123!@#;" +
-                                       "Initial Catalog=ShoppingSite;");
+            SqlConnection myConnection = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["dbcn"].ConnectionString);
             try
             {
                 myConnection.Open();
