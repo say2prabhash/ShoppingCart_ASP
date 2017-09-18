@@ -50,6 +50,7 @@ namespace ShoppingCart
                 Label lbl = new Label();
                 lbl.Text = "Thank You for placing order";
                 this.Controls.Add(lbl);
+                myConnection.Close();
             }
             catch (Exception exception)
             {
