@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
+    <Content Include="DatabaseConnectionProblem.aspx" />
     <Content Include="Inventory.aspx" />
     <Content Include="OrderGeneration.aspx" />
     <Content Include="packages.config" />
@@ -77,6 +79,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PageLoadingProblem.aspx" />
     <Content Include="ProductRemoval.aspx" />
     <Content Include="ShoppingCart.aspx" />
     <Content Include="HomePage.aspx" />
@@ -93,6 +96,13 @@
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseConnectionProblem.aspx.cs">
+      <DependentUpon>DatabaseConnectionProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DatabaseConnectionProblem.aspx.designer.cs">
+      <DependentUpon>DatabaseConnectionProblem.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -106,6 +116,13 @@
     </Compile>
     <Compile Include="OrderGeneration.aspx.designer.cs">
       <DependentUpon>OrderGeneration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageLoadingProblem.aspx.cs">
+      <DependentUpon>PageLoadingProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageLoadingProblem.aspx.designer.cs">
+      <DependentUpon>PageLoadingProblem.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductRemoval.aspx.cs">
       <DependentUpon>ProductRemoval.aspx</DependentUpon>

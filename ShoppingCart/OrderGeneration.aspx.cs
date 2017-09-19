@@ -52,9 +52,17 @@ namespace ShoppingCart
                 this.Controls.Add(lbl);
                 myConnection.Close();
             }
+            catch (SqlException dataBaseException)
+            {
+                Response.Redirect("DatabaseConnectionProblem.aspx");
+            }
             catch (Exception exception)
             {
-
+                Response.Write("PageLoadiingProblem.aspx");
+            }
+            finally
+            {
+                myConnection.Close();
             }
         }
     }

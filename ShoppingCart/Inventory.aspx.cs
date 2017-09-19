@@ -20,17 +20,17 @@ namespace ShoppingCart
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            productName = TextBox1.Text;
+            productName = txt_PName.Text;
         }
 
         protected void TextBox2_TextChanged(object sender, EventArgs e)
         {
-            pId = TextBox2.Text;
+            pId = txt_PId.Text;
         }
 
         protected void TextBox3_TextChanged(object sender, EventArgs e)
         {
-            price = int.Parse(TextBox3.Text);
+            price = int.Parse(txt_Price.Text);
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -53,9 +53,13 @@ namespace ShoppingCart
                 myCommand.ExecuteNonQuery();
                 myConnection.Close();
             }
-            catch (Exception ex)
+            catch (SqlException dataBaseException)
             {
-
+                Response.Redirect("DatabaseConnectionProblem.aspx");
+            }
+            finally
+            {
+                myConnection.Close();
             }
         }
     }

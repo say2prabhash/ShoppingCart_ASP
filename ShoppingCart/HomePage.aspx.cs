@@ -13,8 +13,8 @@ namespace ShoppingCart
     {
         Dictionary<string, int> cartItems;
         Dictionary<string, string> productId;
-        Label[] productName;
-        Label[] productPrice;
+        Label[] lbl_productName;
+        Label[] lbl_productPrice;
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlConnection myConnection = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["dbcn"].ConnectionString);
@@ -33,27 +33,27 @@ namespace ShoppingCart
                 myReader.Close();
                 SqlDataReader myReader1 = null;
                 myReader1 = myCommand.ExecuteReader();
-                productName = new Label[i];
-                productPrice = new Label[i];
+                lbl_productName = new Label[i];
+                lbl_productPrice = new Label[i];
                 productId = new Dictionary<string, string>();
                 for (int j=0;j<i;j++)
                 {
                     myReader1.Read();
-                    productName[j] = new Label();
-                    productName[j].Text = myReader1["PName"].ToString();
-                    productPrice[j] = new Label();
-                    productPrice[j].Text = myReader1["Price"].ToString();
-                    productId[productName[j].Text] = myReader1["PId"].ToString();
-                    this.Form.Controls.Add(productName[j]);
+                    lbl_productName[j] = new Label();
+                    lbl_productName[j].Text = myReader1["PName"].ToString();
+                    lbl_productPrice[j] = new Label();
+                    lbl_productPrice[j].Text = myReader1["Price"].ToString();
+                    productId[lbl_productName[j].Text] = myReader1["PId"].ToString();
+                    this.Form.Controls.Add(lbl_productName[j]);
                     this.Form.Controls.Add(new LiteralControl("<br>"));
-                    this.Form.Controls.Add(productPrice[j]);
+                    this.Form.Controls.Add(lbl_productPrice[j]);
                     this.Form.Controls.Add(new LiteralControl("<br>"));
-                    Button addToCart = new Button();
-                    addToCart.Text = "Add "+ productName[j].Text+ " to cart";
-                    addToCart.ID = productName[j].Text;
-                    addToCart.Font.Size = FontUnit.Point(10);
-                    addToCart.Click += new EventHandler(AddToCart);
-                    this.Form.Controls.Add(addToCart);
+                    Button btn_addToCart = new Button();
+                    btn_addToCart.Text = "Add "+ lbl_productName[j].Text+ " to cart";
+                    btn_addToCart.ID = lbl_productName[j].Text;
+                    btn_addToCart.Font.Size = FontUnit.Point(10);
+                    btn_addToCart.Click += new EventHandler(AddToCart);
+                    this.Form.Controls.Add(btn_addToCart);
                     this.Form.Controls.Add(new LiteralControl("<br>"));
                     this.Form.Controls.Add(new LiteralControl("<br>"));
                 }
@@ -61,9 +61,17 @@ namespace ShoppingCart
                 myConnection.Close();
                 HttpContext.Current.Session["productId"] = productId;
             }
-            catch(Exception exception)
+            catch (SqlException dataBaseException)
             {
-
+                Response.Redirect("DatabaseConnectionProblem.aspx");
+            }
+            catch (Exception exception)
+            {
+                Response.Write("PageLoadiingProblem.aspx");
+            }
+            finally
+            {
+                myConnection.Close();
             }
         }
         protected void AddToCart(object sender,EventArgs e)
@@ -73,11 +81,11 @@ namespace ShoppingCart
             {
                 cartItems = new Dictionary<string, int>();
                 cartItems = (Dictionary<string,int>)ViewState["cart"];
-                for (int i = 0; i < productName.Length; i++)
+                for (int i = 0; i < lbl_productName.Length; i++)
                 {
-                    if (b.ID.Equals(productName[i].Text))
+                    if (b.ID.Equals(lbl_productName[i].Text))
                     {
-                        cartItems[productName[i].Text] = int.Parse(productPrice[i].Text);
+                        cartItems[lbl_productName[i].Text] = int.Parse(lbl_productPrice[i].Text);
                         break;
                     }
                 }
@@ -88,11 +96,11 @@ namespace ShoppingCart
             {
                 cartItems = new Dictionary<string, int>();
                 
-                for (int i = 0; i < productName.Length; i++)
+                for (int i = 0; i < lbl_productName.Length; i++)
                 {
-                    if (b.ID.Equals(productName[i].Text))
+                    if (b.ID.Equals(lbl_productName[i].Text))
                     {
-                        cartItems[productName[i].Text] = int.Parse(productPrice[i].Text);
+                        cartItems[lbl_productName[i].Text] = int.Parse(lbl_productPrice[i].Text);
                         ViewState["cart"] = cartItems;
                        HttpContext.Current.Session["itemList"] = cartItems;
                         break;
